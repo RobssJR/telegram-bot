@@ -1,25 +1,26 @@
-# Imagem base com Python 3.7 no Debian Buster (ARMv7)
-FROM arm64v7/python:3.7.10-buster
+# Use a imagem oficial do Python para ARMv7 (RPi 3 B+)
+FROM arm32v7/python:3.11-slim
 
-# Define o diretório de trabalho dentro do container
-WORKDIR /app
+# Define variáveis de ambiente para o Python
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
-# Instala dependências de sistema necessárias para compilar pacotes Python
-RUN apt-get update && apt-get install -y \
+# Instala dependências do sistema necessárias
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    libffi-dev \
-    libssl-dev \
-    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copia o arquivo de dependências para o container
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Primeiro copia os requisitos para aproveitar o cache do Docker
 COPY requirements.txt .
 
-# Instala as dependências Python
+# Instala as dependências do Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o restante do código da aplicação
+# Copia o restante da aplicação
 COPY . .
 
-# Define o comando padrão de execução
+# Comando para executar a aplicação
 CMD ["python", "app.py"]
