@@ -1,5 +1,5 @@
 # Imagem base com Python 3.7 no Debian Buster (ARMv7)
-FROM arm32v7/python:3.7.10-buster
+FROM arm64v7/python:3.7.10-buster
 
 # Define o diretório de trabalho dentro do container
 WORKDIR /app
