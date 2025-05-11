@@ -43,7 +43,8 @@ jobs:
       with:
         context: .
         file: Dockerfile
+        platforms: linux/arm/v7 
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        build-args: |
-          PYTHON_VERSION=3.11
+        tags: ${{ steps.meta.outputs.tags }}1
+
+        

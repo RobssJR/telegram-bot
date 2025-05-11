@@ -1,4 +1,4 @@
-FROM arm32v7/python:3.11-slim
+FROM --platform=linux/arm/v7 python:3.11-slim
 
 WORKDIR /app
 
