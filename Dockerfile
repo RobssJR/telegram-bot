@@ -1,12 +1,10 @@
-FROM python:3.11-slim
+FROM python:3.9-slim
 
 WORKDIR /app
 
-# Copia primeiro o requirements.txt para aproveitar cache Docker
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Copia o restante da aplicação
-COPY app .
+COPY app.py .
 
-CMD ["python", "main.py"]
+CMD ["python", "app.py"]
