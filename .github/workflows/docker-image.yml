@@ -9,15 +9,13 @@ on:
 env:
   REGISTRY: ghcr.io  # GitHub Container Registry
   IMAGE_NAME: ${{ github.repository }}  # Nome automático do repositório
-  # OU use um nome personalizado:
-  # IMAGE_NAME: "my-image-name"
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write  # Permissão para push no GHCR
+      packages: write
 
     steps:
     - uses: actions/checkout@v4
