@@ -42,6 +42,8 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        push: ${{ github.event_name != 'pull_request' }}  # Push apenas em commits para main
+        file: Dockerfile
+        push: true
         tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        build-args: |
+          PYTHON_VERSION=3.11
